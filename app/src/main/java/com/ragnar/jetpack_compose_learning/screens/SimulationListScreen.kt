@@ -1,4 +1,8 @@
 package com.ragnar.jetpack_compose_learning.screens
 
-class SimulationListScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun SimulationListScreen(){
+
 }

@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.ragnar.jetpack_compose_learning.items.BottomNavItem
+import com.ragnar.jetpack_compose_learning.screens.SimulationListScreen
 import com.ragnar.jetpack_compose_learning.screens.SpeechToTextScreen
 import com.ragnar.jetpack_compose_learning.screens.TextToSpeechScreen
 
@@ -20,6 +21,10 @@ fun BottomNavGraph(navController: NavHostController) {
         // load Text To speech screen
         composable(BottomNavItem.textToSpeech.route) {
             TextToSpeechScreen()
+        }
+        // load all simulations here
+        composable(BottomNavItem.simulationScreen.route) {
+            SimulationListScreen()
         }
 
     }

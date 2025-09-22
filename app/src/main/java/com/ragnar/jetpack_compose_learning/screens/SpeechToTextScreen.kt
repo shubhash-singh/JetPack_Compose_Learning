@@ -117,11 +117,11 @@ fun SpeechToTextScreen(
                         onLanguageSelected = { language ->
                             val languageCode = when(language) {
                                 "English" -> "en-IN"
-                                "हिंदी (Hindi)" -> "hi-IN"
-                                "ಕನ್ನಡ (Kannada)" -> "kn-IN"
-                                "தமிழ் (Tamil)" -> "ta-IN"
-                                "తెలుగు (Telugu)" -> "te-IN"
-                                else -> "en-IN"
+                                "Hindi"   -> "hi-IN"
+                                "Kannada" -> "kn-IN"
+                                "Tamil"   -> "ta-IN"
+                                "Telugu"  -> "te-IN"
+                                else      -> "en-IN"
                             }
                             controller.setLanguage(languageCode)
                             selectedLanguage = language

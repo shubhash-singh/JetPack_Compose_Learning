@@ -36,12 +36,14 @@ fun BottomNavMainScreen() {
 
     val items = listOf(
         BottomNavItem.textToSpeech,
-        BottomNavItem.speechToText
+        BottomNavItem.speechToText,
+        BottomNavItem.simulationScreen
     )
     val topBarTitle: String = when (currentRoute) {
         BottomNavItem.textToSpeech.route -> "Text to Speech"
         BottomNavItem.speechToText.route -> "Speech to Text"
-        else -> "NCERT Learning App" // default title
+        BottomNavItem.simulationScreen.route -> "Simulations"
+        else -> "NCERT Learning App"
     }
 
     Scaffold(
