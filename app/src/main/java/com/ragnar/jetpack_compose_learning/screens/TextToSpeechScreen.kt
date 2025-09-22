@@ -65,7 +65,6 @@ import com.ragnar.jetpack_compose_learning.ui.theme.TextPrimary
 import com.ragnar.jetpack_compose_learning.ui.theme.TextSecondary
 import com.ragnar.jetpack_compose_learning.ui.theme.White
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextToSpeechScreen(
@@ -74,6 +73,13 @@ fun TextToSpeechScreen(
     val context = LocalContext.current
     val state by controller.state.collectAsState()
     var textInput by remember { mutableStateOf("") }
+
+    // Remember WebView across recompositions
+    val webView = remember {
+        WebView(context).apply {
+            controller.setupWebView(this) // one-time setup
+        }
+    }
 
     LaunchedEffect(Unit) {
         controller.initialize(context)
@@ -267,18 +273,19 @@ fun TextToSpeechScreen(
 
                     // WebView for Lip Sync
                     AndroidView(
-                        factory = { context ->
-                            WebView(context).apply {
-                                controller.setupWebView(this)
-                            }
-                        },
+                        factory = { webView },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .weight(1f)
+                            .weight(1f),
+//                        update = {
+//                            // Optional: keep WebView updated with state, instead of reloading
+//                            if (state.isSpeaking) {
+//                                it.evaluateJavascript("window.AndroidLipSyncAPI.startLipSync('${textInput}')", null)
+//                            }
+//                        }
                     )
                 }
             }
-
 
             // Speech Controls Card
             Card(
@@ -384,8 +391,6 @@ fun TextToSpeechScreen(
                     }
                 }
             }
-
-
         }
     }
 }

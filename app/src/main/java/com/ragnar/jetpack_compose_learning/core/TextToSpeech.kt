@@ -65,6 +65,7 @@ class TextToSpeech : ViewModel(), TextToSpeech.OnInitListener {
         if (_state.value.isInitialized) return
 
         updateStatus("Initializing Text-to-Speech...")
+        Log.d("TextToSpeech", "Initializing Text-to-Speech...")
         textToSpeech = TextToSpeech(context, this)
     }
 
