@@ -74,12 +74,7 @@ fun TextToSpeechScreen(
     val state by controller.state.collectAsState()
     var textInput by remember { mutableStateOf("") }
 
-    // Remember WebView across recompositions
-    val webView = remember {
-        WebView(context).apply {
-            controller.setupWebView(this) // one-time setup
-        }
-    }
+
 
     LaunchedEffect(Unit) {
         controller.initialize(context)
@@ -273,7 +268,11 @@ fun TextToSpeechScreen(
 
                     // WebView for Lip Sync
                     AndroidView(
-                        factory = { webView },
+                        factory = {
+                            WebView(context).apply {
+                            controller.setupWebView(this) // one-time setup
+                            }
+                                  },
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(1f),

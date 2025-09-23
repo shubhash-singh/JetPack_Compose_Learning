@@ -62,7 +62,8 @@ class TextToSpeech : ViewModel(), TextToSpeech.OnInitListener {
      * Initialize the TTS controller
      */
     fun initialize(context: Context) {
-        if (_state.value.isInitialized) return
+        // Only skip if the engine instance already exists
+        if (textToSpeech != null) return
 
         updateStatus("Initializing Text-to-Speech...")
         Log.d("TextToSpeech", "Initializing Text-to-Speech...")
@@ -378,6 +379,11 @@ class TextToSpeech : ViewModel(), TextToSpeech.OnInitListener {
         }
         textToSpeech = null
         webView = null
+        _state.value = _state.value.copy(
+            isInitialized = false,
+            isSpeaking = false,
+            statusMessage = "Text-to-Speech resources released"
+        )
     }
 
     override fun onCleared() {
